@@ -11,11 +11,12 @@ const countDownEl = document.getElementById("timer")
 const playBTN = document.querySelector(".timerBTNStart")
 playBTN.addEventListener("click", function () {
     intervalId = setInterval(upDateCountDown, 1000)
+    playBTN.disabled = true
     const pauseBTN = document.querySelector(".timerBTNStop")
-    console.log(time)
     pauseBTN.addEventListener("click", pause)
     function pause() {
         clearInterval(intervalId)
+        playBTN.disabled = false
     }
 })
 
@@ -25,6 +26,7 @@ function upDateCountDown() {
     const minutes = Math.floor(time / 60);
     let seconds = time % 60;
     countDownEl.textContent = `${minutes ? minutes : "12"}:${seconds ? seconds : "00"}`;
+
     if (time > 0) time--;
 }
 
@@ -69,6 +71,7 @@ function newGame() {
     upDateCountDown()
     time = 720
     clearInterval(intervalId)
+    playBTN.disabled = false
 }
 
 
